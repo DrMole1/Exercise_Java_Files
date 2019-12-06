@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.Normalizer;
  
 //=====================================================
 //
@@ -31,7 +32,7 @@ public class main {
 		}
 		
 		//Ici, nous écrivons dans le fichier une phrase basique mais vraie
-		writer.println("Je veux avoir cours avec Grace tout les jours.");
+		writer.println("Je veux avoir cours avec Grace tout les jours. Noël c'est bien.");
 		//Ici, nous fermons le fichier
 		writer.close();
 		
@@ -59,6 +60,8 @@ public class main {
 			while ((ligne = reader.readLine()) != null)
 			{
 				System.out.println(ligne);
+				//Cette ligne de code permet de supprimer les accents, pour mieux compter les voyelles. On utilise une bibliothèque ainsi que la table ascii.
+				ligne = Normalizer.normalize(ligne, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 				texte = texte + " " + ligne;
 			}	
 		} catch (IOException e) {
